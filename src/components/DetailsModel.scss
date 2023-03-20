@@ -1,0 +1,19 @@
+.details-modal {
+  left: calc(30vw);
+  min-width: 40rem;
+  top: 0;
+  position: fixed;
+  z-index: 1;
+  background-color: coral;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+  padding: 0.25rem;
+  .card-header {
+    display: inline-flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}

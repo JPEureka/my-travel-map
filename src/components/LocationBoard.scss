@@ -1,0 +1,293 @@
+@mixin countryBlockStyle() {
+  border-style: double;
+  border-width: 0.25rem;
+  border: solid rgb(3, 49, 28);
+}
+.location-board {
+  width: 100%;
+  display: grid;
+  max-height: 95%;
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(26, 1fr);
+
+  grid-template-areas:
+    "pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn pn"
+    "CA CA GL . . . . . NO NO SE SE FI FI . RU RU RU RU RU RU . . ."
+    "CA CA . IS . . . . NO NO SE SE FI FI . RU RU RU RU RU RU . . ."
+    "CA CA . . GB GB GB . . . . . . EE . RU RU RU RU RU RU . . ."
+    "US US . . GB GB GB . . DK . . . LV . RU RU RU RU RU RU . . ."
+    "US US . . GB GB GB . NL DE DE DE PL PL LT RU RU RU RU RU RU . . ."
+    "US US . . GB GB GB . NL DE DE DE PL PL BY RU RU RU RU RU RU . . ."
+    "US US . . . . . . BE DE DE DE CZ . . RU RU RU RU RU RU . . ."
+    "US US . . . . . FR FR DE DE DE SK UA UA RU RU RU RU RU RU . . ."
+    "US US . . . . . FR FR CH AT HU HU RO . . KZ KZ MN MN . . JP ."
+    "US US . . . PT ES FR FR IT IT SI RS RO . . KZ KZ CN CN KR . JP ."
+    "US US . . . . . . . IT IT HR BA BG . . . . CN CN . . JP ."
+    "MX MX . . . . . . . . . GR . TR . . IN IN . . . . JP ."
+    "MX MX . . . MA MA DZ DZ TN LY LY EG IQ IL . IN IN . . TW . . ."
+    "MX MX . CU . . . . . . . . SD SA AE . IN IN . TH . . . ."
+    "GT . . . . . . . . . . . SS SA . . . . . MY . . . ."
+    ". NI . . . . . . . . . . ET . . . . . . SG . . . ."
+    ". . CO VE . . . . . . . . KE . . . . . . . . . . ."
+    "PE BZ BZ BZ . . . . . . . TZ . . . . . . . . . . . ."
+    "PE BO . . . . . . . . ZM MZ . . . . . . . . . . . ."
+    "PE . . . . . . . . BW . . MG . . . . . . . ID . . ."
+    "CL . . . . . . . . ZA ZA . . . . . . . . . . . . ."
+    "CL AR UY . . . . . . ZA ZA . . . . . . . . . . AU . ."
+    ". AR . . . . . . . . . . . . . . . . . . . AU . NZ"
+    ". . . . . . . . . . . . . . . . . . . . . . . NZ"
+    "ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps ps";
+
+  .country-block {
+    @include countryBlockStyle();
+    background-color: rgb(160, 216, 238);
+  }
+  .ps {
+    grid-area: ps;
+    background-color: rgb(242, 243, 236);
+  }
+  .pn {
+    grid-area: pn;
+    background-color: rgb(242, 243, 236);
+  }
+  .IT {
+    grid-area: IT;
+  }
+  .ET {
+    grid-area: ET;
+  }
+  .ZA {
+    grid-area: ZA;
+  }
+  .TZ {
+    grid-area: TZ;
+  }
+  .IQ {
+    grid-area: IQ;
+  }
+  .ID {
+    grid-area: ID;
+  }
+  .KE {
+    grid-area: KE;
+  }
+  .ZM {
+    grid-area: ZM;
+  }
+  .BW {
+    grid-area: BW;
+  }
+  .VE {
+    grid-area: VE;
+  }
+  .MG {
+    grid-area: MG;
+  }
+  .MZ {
+    grid-area: MZ;
+  }
+  .SD {
+    grid-area: SD;
+  }
+  .IL {
+    grid-area: IL;
+  }
+  .SS {
+    grid-area: SS;
+  }
+  .PE {
+    grid-area: PE;
+  }
+  .CL {
+    grid-area: CL;
+  }
+  .TN {
+    grid-area: TN;
+  }
+  .LY {
+    grid-area: LY;
+  }
+  .AR {
+    grid-area: AR;
+  }
+  .SA {
+    grid-area: SA;
+  }
+  .DZ {
+    grid-area: DZ;
+  }
+  .BZ {
+    grid-area: BZ;
+  }
+  .CO {
+    grid-area: CO;
+  }
+  .UY {
+    grid-area: UY;
+  }
+  .BO {
+    grid-area: BO;
+  }
+  .GT {
+    grid-area: GT;
+  }
+  .CU {
+    grid-area: CU;
+  }
+  .GL {
+    grid-area: GL;
+  }
+  .NI {
+    grid-area: NI;
+  }
+  .EG {
+    grid-area: EG;
+  }
+  .IS {
+    grid-area: IS;
+  }
+  .MX {
+    grid-area: MX;
+  }
+  .MA {
+    grid-area: MA;
+  }
+  .BA {
+    grid-area: BA;
+  }
+  .TR {
+    grid-area: TR;
+  }
+  .GR {
+    grid-area: GR;
+  }
+  .RS {
+    grid-area: RS;
+  }
+  .BG {
+    grid-area: BG;
+  }
+  .RO {
+    grid-area: RO;
+  }
+  .HR {
+    grid-area: HR;
+  }
+  .SG {
+    grid-area: SG;
+  }
+  .MY {
+    grid-area: MY;
+  }
+  .IN {
+    grid-area: IN;
+  }
+  .MN {
+    grid-area: MN;
+  }
+  .KZ {
+    grid-area: KZ;
+  }
+  .UA {
+    grid-area: UA;
+  }
+  .LT {
+    grid-area: LT;
+  }
+  .BY {
+    grid-area: BY;
+  }
+  .RU {
+    grid-area: RU;
+  }
+  .LV {
+    grid-area: LV;
+  }
+  .EE {
+    grid-area: EE;
+  }
+  .DK {
+    grid-area: DK;
+  }
+  .NO {
+    grid-area: NO;
+  }
+  .SE {
+    grid-area: SE;
+  }
+  .FI {
+    grid-area: FI;
+  }
+  .PL {
+    grid-area: PL;
+  }
+  .ES {
+    grid-area: ES;
+  }
+  .CA {
+    grid-area: CA;
+  }
+  .SI {
+    grid-area: SI;
+  }
+  .PT {
+    grid-area: PT;
+  }
+  .US {
+    grid-area: US;
+  }
+  .GB {
+    grid-area: GB;
+  }
+  .NL {
+    grid-area: NL;
+  }
+  .BE {
+    grid-area: BE;
+  }
+  .FR {
+    grid-area: FR;
+  }
+  .DE {
+    grid-area: DE;
+  }
+  .HU {
+    grid-area: HU;
+  }
+  .SK {
+    grid-area: SK;
+  }
+  .CZ {
+    grid-area: CZ;
+  }
+  .AT {
+    grid-area: AT;
+  }
+  .AE {
+    grid-area: AE;
+  }
+  .CH {
+    grid-area: CH;
+  }
+  .CN {
+    grid-area: CN;
+  }
+  .TW {
+    grid-area: TW;
+  }
+  .KR {
+    grid-area: KR;
+  }
+  .JP {
+    grid-area: JP;
+  }
+  .TH {
+    grid-area: TH;
+  }
+  .NZ {
+    grid-area: NZ;
+  }
+  .AU {
+    grid-area: AU;
+  }
+}

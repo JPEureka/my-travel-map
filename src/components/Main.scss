@@ -1,0 +1,39 @@
+.main {
+  display: grid;
+  width: calc(90vw);
+  max-height: calc(55vw);
+  margin: auto;
+  grid-template-columns: 15% auto;
+  grid-template-rows: 8% auto;
+  grid-template-areas:
+    "header header header header"
+    "sidebar main main main"
+    "sidebar main main main"
+    "sidebar main main main";
+
+  h1 {
+    grid-area: header;
+    margin-bottom: 0.5rem;
+  }
+  .location-board {
+    border-style: double;
+    border-radius: 0.25rem;
+    border-width: 0.25rem;
+    border: solid rgb(52, 189, 125);
+    grid-area: main;
+  }
+  .record-input-board {
+    border-style: double;
+    border-radius: 0.25rem;
+    border-width: 0.25rem;
+    border: solid rgb(111, 52, 189);
+    grid-area: sidebar;
+  }
+  .details-board {
+    border-style: double;
+    border-radius: 0.25rem;
+    border-width: 0.25rem;
+    border: solid rgb(189, 134, 52);
+    grid-area: footer;
+  }
+}
