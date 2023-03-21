@@ -9,31 +9,52 @@ const DetailsModel = ({ code, onModalClose }: props) => {
   const state = useSelector((state: { countries: countryInfo[] }) => state);
   const countryName = countryCodeMapper.getCountryName(code);
   let travelInfo = [] as countryInfo[];
-  console.log(state);
   if (state?.countries) {
     travelInfo = state.countries.filter((data) => data.code === code);
   }
-  console.log(travelInfo);
   return (
     <div className="details-modal">
       <section className="card-header">
-        <span>DETAILS</span>
-        <button onClick={onModalClose}>x</button>
+        <h2>DETAILS</h2>
+        <button
+          aria-label="Close"
+          className="close-modal"
+          onClick={onModalClose}
+        >
+          x
+        </button>
       </section>
-      {travelInfo.length ? (
-        <section>
-          <span className="detail-counrty-name">{travelInfo[0].name}</span>
-          <div className="detail-travel-dates">
-            {travelInfo[0].dates.map((date, i) => (
-              <div key={i}>
-                <span>{date[0]}</span> -<span>{date[1]}</span>
-              </div>
-            ))}
+      <section className="card-content">
+        {travelInfo.length ? (
+          <div className="travel-details">
+            <span className="detail-counrty-name">{travelInfo[0].name}</span>
+            <div className="travel-logs">
+              {travelInfo[0].logs.map((log, i) => (
+                <div key={i} className="travel-log">
+                  <div className="travel-dates">
+                    <span>{log.st}</span> - <span>{log.et}</span>
+                  </div>
+                  <div className="travel-notes">
+                    <label>Travel Notes</label>
+                    <div className="notes">{log.notes}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </section>
-      ) : (
-        <span>{`OOPS! NO TRAVEL RECORDS THIS COUNTRY: ${countryName}`}</span>
-      )}
+        ) : (
+          <span>{`OOPS! NO TRAVEL RECORDS FOR THIS COUNTRY: ${countryName}`}</span>
+        )}
+      </section>
+      <section className="card-footer">
+        <button
+          aria-label="Close"
+          className="close-modal"
+          onClick={onModalClose}
+        >
+          Close
+        </button>
+      </section>
     </div>
   );
 };

@@ -3,15 +3,15 @@ import { ADD_COUNTRY, REMOVE_COUNTRY } from "./actionTypes";
 const addCountry = ({
   name,
   code,
-  dates,
+  logs,
 }: {
   name: string;
   code: string;
-  dates: string[][];
+  logs: Array<{}>;
 }) => {
   return {
     type: ADD_COUNTRY,
-    payload: { name, code, dates },
+    payload: { name, code, logs },
   };
 };
 

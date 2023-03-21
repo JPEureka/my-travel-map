@@ -7,7 +7,6 @@ const LocationBoard = () => {
   const [showDetailInfo, setShowDetailInfo] = React.useState(false);
   const [currentShowCode, setCurentShowCode] = React.useState("");
   const onShow = (code: string) => {
-    console.log(code);
     setCurentShowCode(code);
     setShowDetailInfo(true);
   };

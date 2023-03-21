@@ -1,21 +1,34 @@
 .record-input-board {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  flex-grow: 0;
-  flex-shrink: 0;
-  max-height: 95%;
-  h4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 0.25rem;
+  grid-template-rows: 1fr 2fr 8fr 2fr 4fr;
+  grid-template-areas:
+    "title"
+    "input"
+    "tlogs"
+    "acbtn"
+    "tlist";
+
+  .record-title {
+    grid-area: title;
     padding: 0.25rem;
   }
+  label {
+    align-self: center;
+  }
   .country-input-section {
-    flex-grow: 0;
-    flex-shrink: 0;
+    padding: 0.25rem 0 0.25rem 0;
+    border-bottom: double gray;
+    grid-area: input;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10rem;
+    label {
+      margin-bottom: 0.25rem;
+    }
     .auto-complete-list {
-      z-index: 1;
+      z-index: 223;
       background-color: rgb(255, 255, 255);
       border: solid gray;
       display: inline-flex;
@@ -28,33 +41,53 @@
       }
     }
   }
-  .travel-dates {
+  .travel-logs {
+    padding: 0.25rem 0 0.25rem 0;
+    border-bottom: double gray;
+    grid-area: tlogs;
     flex-grow: 0;
     flex-shrink: 0;
     margin-bottom: 10rem;
-    max-height: 30%;
-    overflow-y: scroll;
-    .add-travel-date-btn {
+    overflow: hidden;
+    height: 95%;
+    background-color: cornsilk;
+    .add-log {
       width: 100%;
-    }
-    .travel-date-entry {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      input {
-        flex-grow: 1;
+      display: inline-flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      .add-travel-log-btn {
+        font-size: 12pt;
       }
     }
+    .travel-logs {
+      max-height: 20rem;
+      overflow-y: scroll;
+    }
+  }
+  .add-record-btn {
+    grid-area: acbtn;
+    background-color: crimson;
   }
   .travel-list-section {
+    padding-top: 0.25rem;
+    grid-area: tlist;
     border: dotted green;
-    background-color: gainsboro;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 0.25rem;
     .travel-country-item {
+      align-items: center;
       display: inline-flex;
       flex-direction: row;
       justify-content: center;
       gap: 1rem;
       width: 100%;
+      button {
+        padding: 0px;
+        width: 20px;
+        height: fit-content;
+      }
     }
   }
 }

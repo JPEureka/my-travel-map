@@ -1,19 +1,97 @@
 .details-modal {
   left: calc(30vw);
   min-width: 40rem;
-  top: 0;
+  top: 10rem;
   position: fixed;
   z-index: 1;
-  background-color: coral;
+  background-color: rgb(243, 180, 157);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 1rem;
   padding: 0.25rem;
   .card-header {
+    font-family: monospace;
     display: inline-flex;
-    justify-content: center;
-    gap: 0.5rem;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 1rem;
+    border-bottom: solid;
+    .close-modal {
+      cursor: pointer;
+      width: 3rem;
+      height: 3rem;
+      background-color: transparent;
+      border: none;
+      font-size: 20pt;
+    }
+  }
+  .card-content {
+    font-family: monospace;
+    font-size: 14pt;
+    min-height: calc(20vw);
+    overflow-y: scroll;
+    margin: 1rem;
+    .travel-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+      .detail-counrty-name {
+        font-size: 14pt;
+        font-weight: bold;
+      }
+      .travel-logs {
+        display: flex;
+        flex-direction: column;
+        border: dashed green;
+        .travel-log {
+          display: flex;
+          flex-direction: column;
+          background-color: cadetblue;
+          .travel-dates {
+            display: inline-flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+          }
+          .travel-notes {
+            gap: 1rem;
+            align-items: center;
+            align-content: start;
+            padding: 0.25rem;
+            display: inline-flex;
+            justify-content: flex-start;
+            border: dotted;
+            .notes {
+              padding: 0.25rem;
+              flex-grow: 1;
+              background-color: honeydew;
+            }
+          }
+        }
+      }
+    }
+  }
+  .card-footer {
+    border-top: solid;
+    padding: 0.25rem;
+
+    margin: 0.5rem 0 0 0;
+    display: inline-flex;
+    justify-content: end;
+    .close-modal {
+      font-family: monospace;
+      background-color: cornflowerblue;
+      border-radius: 0.25rem;
+      box-shadow: cornflowerblue;
+      width: 15%;
+      font-size: 20pt;
+      align-self: center;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(159, 185, 231);
+      }
+    }
   }
 }

@@ -4,16 +4,18 @@ import { addCountry, removeCounrty } from "../actions/countryListAction";
 import { countryInfo } from "../types";
 import { getCountryNameList, countryCodeMapper } from "../consts";
 import "./RecordInputBoard.scss";
-import TravelDateInput from "./TravelDateInput";
+import TravelDetailInput from "./TravelDetailInput";
 const RecordInputBoard = () => {
   const state = useSelector((state: { countries: countryInfo[] }) => state);
   const dispatch = useDispatch();
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [showAutoComplete, setShowAutoComplete] = React.useState(false);
-  const [travelDates, setTravelDates] = React.useState<string[][]>([]);
+  const [travelDetails, setTravelDates] = React.useState<
+    Array<{ st: string; et: string; notes: string }>
+  >([]);
   const [autoCompleteList, setAutoCompleteList] =
     React.useState(getCountryNameList);
-  console.log(state);
+
   let debunceTimeout: any;
   const debunceFilter = (val: any) => {
     clearTimeout(debunceTimeout);
@@ -26,40 +28,48 @@ const RecordInputBoard = () => {
           )
         );
       }
-    }, 500);
+    }, 300);
   };
 
   const addDateEntry = () => {
-    const newObj = ["", ""];
-    setTravelDates([...travelDates, newObj]);
+    setTravelDates([...travelDetails, { st: "", et: "", notes: "" }]);
   };
   const onDateEntryUpdate = ({
     key,
     val,
-    index,
+    dateType,
   }: {
     key: number;
     val: string;
-    index: number;
+    dateType: string;
   }) => {
-    console.log(val);
-    let nv = travelDates.slice();
-    nv[key][index] = val;
+    let nv: Array<{ st: string; et: string; notes: string }> =
+      travelDetails.slice();
+    if (dateType === "st") nv[key].st = val;
+    else nv[key].et = val;
     setTravelDates(nv);
   };
   const onDateEntryDelete = (key: number) => {
-    let nv = travelDates.slice();
+    let nv = travelDetails.slice();
     nv.splice(key, 1);
     setTravelDates(nv);
   };
+
+  const setNotes = () => {
+    let nv = travelDetails.slice();
+    document.querySelectorAll(".travel-note-textarea").forEach((el, i) => {
+      nv[i].notes = (el as HTMLInputElement).value;
+    });
+  };
+
   return (
     <div className="record-input-board">
-      <h4>Input Your Travel Record</h4>
+      <h4 className="record-title">Input Your Travel Record</h4>
       <section
         className="country-input-section"
         onClick={() => setShowAutoComplete(!showAutoComplete)}
       >
-        <span>Travel Country</span>
+        <label htmlFor="countryNameInput">Travel Country</label>
         <input
           type="text"
           ref={inputRef}
@@ -92,56 +102,76 @@ const RecordInputBoard = () => {
           </div>
         ) : null}
       </section>
-      <section className="travel-dates">
-        <button className="add-travel-date-btn" onClick={addDateEntry}>
-          Add travel date
-        </button>
-        {travelDates.map((entry, i) => (
-          <TravelDateInput
-            key={i}
-            index={i}
-            onChange={onDateEntryUpdate}
-            onDelete={onDateEntryDelete}
-          />
-        ))}
+      <section className="travel-logs">
+        <div className="add-log">
+          <label htmlFor="addTravelLogBtn"> Add travel log</label>
+          <button
+            id="addTravelLogBtn"
+            className="add-travel-log-btn"
+            onClick={addDateEntry}
+          >
+            +
+          </button>
+        </div>
+
+        <div className="travel-logs">
+          {travelDetails.map((entry, i) => (
+            <TravelDetailInput
+              key={i}
+              index={i}
+              onChange={onDateEntryUpdate}
+              onDelete={onDateEntryDelete}
+            />
+          ))}
+        </div>
       </section>
       <button
+        className="add-record-btn"
+        aria-label="add record"
         onClick={() => {
           const input = document.querySelector(
             "#countryNameInput"
           ) as HTMLInputElement;
           if (input.value) {
             const code = countryCodeMapper.getCountryCode(input.value);
+            setNotes();
             dispatch(
-              addCountry({ name: input.value, code, dates: travelDates })
+              addCountry({
+                name: input.value,
+                code,
+                logs: travelDetails.sort(
+                  (a, b) => new Date(a.st).getTime() - new Date(b.st).getTime()
+                ),
+              })
             );
             input.value = "";
             setTravelDates([]);
           }
         }}
       >
-        +
+        ADD RECORD
       </button>
-      {state && state?.countries?.length ? (
-        <section className="travel-list-section">
-          {state.countries.map((item, index) => (
-            <div key={index} className="travel-country-item">
-              <img
-                alt={item.name}
-                src={countryCodeMapper.getCountryFlag(item.code)}
-              />
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch(removeCounrty(index));
-                }}
-              >
-                X
-              </button>
-            </div>
-          ))}
-        </section>
-      ) : null}
+      <section className="travel-list-section">
+        {state && state?.countries?.length
+          ? state.countries.map((item, index) => (
+              <div key={index} className="travel-country-item">
+                <img
+                  alt={item.name}
+                  src={countryCodeMapper.getCountryFlag(item.code)}
+                />
+                <button
+                  aria-label="Remove"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(removeCounrty(index));
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            ))
+          : "No Record"}
+      </section>
     </div>
   );
 };

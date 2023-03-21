@@ -1,15 +1,14 @@
 .main {
   display: grid;
-  width: calc(90vw);
+  padding: 1rem 2rem 0 2rem;
   max-height: calc(55vw);
   margin: auto;
-  grid-template-columns: 15% auto;
-  grid-template-rows: 8% auto;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 0.25rem;
+  grid-template-rows: calc(5vw) calc(50vw);
   grid-template-areas:
-    "header header header header"
-    "sidebar main main main"
-    "sidebar main main main"
-    "sidebar main main main";
+    "header header "
+    "sidebar main";
 
   h1 {
     grid-area: header;
@@ -28,6 +27,7 @@
     border-width: 0.25rem;
     border: solid rgb(111, 52, 189);
     grid-area: sidebar;
+    padding: 0 1rem 0 1rem;
   }
   .details-board {
     border-style: double;

@@ -1,3 +1,4 @@
+type logsType = Array<{ st: string; et: string; notes: string }>;
 export type countryListActionType = {
   type: string;
   key?: number;
@@ -7,5 +8,5 @@ export type countryListActionType = {
 export type countryInfo = {
   name: string;
   code: string;
-  dates: string[];
+  logs: logsType;
 };

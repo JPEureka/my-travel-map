@@ -1,0 +1,27 @@
+.travel-detail-input {
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: dotted gray;
+  label {
+    font-size: 10pt;
+  }
+  .start-date,
+  .end-date,
+  .travel-note {
+    padding: 0.25rem;
+    label {
+      width: 25%;
+    }
+    display: inline-flex;
+    justify-content: space-around;
+
+    display: inline-flex;
+    input,
+    textarea {
+      margin-left: 0.1rem;
+      flex-grow: 1;
+    }
+  }
+}
