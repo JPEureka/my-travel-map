@@ -2,7 +2,7 @@ import React from "react";
 import CountryBlock from "./CountryBlock";
 import { availableCountry } from "../consts";
 import "./LocationBoard.scss";
-import DetailsModel from "./DetailsModel";
+import DetailsModel from "./DetailsModal";
 const LocationBoard = () => {
   const [showDetailInfo, setShowDetailInfo] = React.useState(false);
   const [currentShowCode, setCurentShowCode] = React.useState("");
@@ -11,10 +11,10 @@ const LocationBoard = () => {
     setShowDetailInfo(true);
   };
   return (
-    <div className="location-board">
+    <div className="location-board" data-testid="locationBoard">
       {showDetailInfo && currentShowCode ? (
         <DetailsModel
-          code={currentShowCode}
+          countryCode={currentShowCode}
           onModalClose={() => setShowDetailInfo(false)}
         />
       ) : null}

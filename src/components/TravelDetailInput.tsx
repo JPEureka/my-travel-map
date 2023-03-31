@@ -21,7 +21,8 @@ const TravelDetailInput = ({ index, onChange, onDelete }: props) => {
         <label htmlFor="st">Start Date:</label>
         <input
           id="st"
-          onChange={(e) => {
+          data-testid={`st-input-${index}`}
+          onChange={e => {
             onChange({ key: index, val: e.target.value, dateType: "st" });
           }}
           type="date"
@@ -31,7 +32,8 @@ const TravelDetailInput = ({ index, onChange, onDelete }: props) => {
         <label htmlFor="et">End Date:</label>
         <input
           id="et"
-          onChange={(e) => {
+          data-testid={`et-input-${index}`}
+          onChange={e => {
             onChange({ key: index, val: e.target.value, dateType: "et" });
           }}
           type="date"
@@ -46,7 +48,11 @@ const TravelDetailInput = ({ index, onChange, onDelete }: props) => {
           spellCheck="false"
         ></textarea>
       </div>
-      <button className="remove-log-btn" onClick={() => onDelete(index)}>
+      <button
+        data-testid="removeLogBtn"
+        className="remove-log-btn"
+        onClick={() => onDelete(index)}
+      >
         -
       </button>
     </div>

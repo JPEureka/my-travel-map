@@ -2,16 +2,18 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { countryInfo } from "../types";
 import { countryCodeMapper } from "../consts";
-import "./DetailsModel.scss";
+import "./DetailsModal.scss";
 
-type props = { code: string; onModalClose: () => void };
-const DetailsModel = ({ code, onModalClose }: props) => {
+type props = { countryCode: string; onModalClose: () => void };
+
+const DetailsModel = ({ countryCode, onModalClose }: props) => {
   const state = useSelector((state: { countries: countryInfo[] }) => state);
-  const countryName = countryCodeMapper.getCountryName(code);
+  const countryName = countryCodeMapper.getCountryName(countryCode);
   let travelInfo = [] as countryInfo[];
   if (state?.countries) {
-    travelInfo = state.countries.filter((data) => data.code === code);
+    travelInfo = state.countries.filter(data => data.code === countryCode);
   }
+
   return (
     <div className="details-modal">
       <section className="card-header">

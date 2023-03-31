@@ -58,7 +58,7 @@
           .travel-notes {
             gap: 1rem;
             align-items: center;
-            align-content: start;
+            align-content: flex-start;
             padding: 0.25rem;
             display: inline-flex;
             justify-content: flex-start;
@@ -79,7 +79,7 @@
 
     margin: 0.5rem 0 0 0;
     display: inline-flex;
-    justify-content: end;
+    justify-content: flex-end;
     .close-modal {
       font-family: monospace;
       background-color: cornflowerblue;

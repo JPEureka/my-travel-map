@@ -19,41 +19,50 @@ const RecordInputBoard = () => {
   let debunceTimeout: any;
   const debunceFilter = (val: any) => {
     clearTimeout(debunceTimeout);
-
     debunceTimeout = setTimeout(() => {
       if (val) {
         setAutoCompleteList(
-          getCountryNameList.filter((item) =>
+          getCountryNameList.filter(item =>
             item.toLowerCase().includes(val.toLowerCase())
           )
         );
       }
-    }, 300);
+    }, 200);
   };
 
-  const addDateEntry = () => {
+  const addDateEntry = React.useCallback(() => {
     setTravelDates([...travelDetails, { st: "", et: "", notes: "" }]);
-  };
-  const onDateEntryUpdate = ({
-    key,
-    val,
-    dateType,
-  }: {
-    key: number;
-    val: string;
-    dateType: string;
-  }) => {
-    let nv: Array<{ st: string; et: string; notes: string }> =
-      travelDetails.slice();
-    if (dateType === "st") nv[key].st = val;
-    else nv[key].et = val;
-    setTravelDates(nv);
-  };
-  const onDateEntryDelete = (key: number) => {
-    let nv = travelDetails.slice();
-    nv.splice(key, 1);
-    setTravelDates(nv);
-  };
+  }, [travelDetails]);
+  const onDateEntryUpdate = React.useCallback(
+    ({
+      key,
+      val,
+      dateType,
+    }: {
+      key: number;
+      val: string;
+      dateType: string;
+    }) => {
+      let nv: Array<{ st: string; et: string; notes: string }> =
+        travelDetails.slice();
+      if (!nv[key]) {
+        nv[key] = { st: "", et: "", notes: "" };
+      }
+      if (dateType === "st") nv[key].st = val;
+      else nv[key].et = val;
+
+      setTravelDates(nv);
+    },
+    [travelDetails]
+  );
+  const onDateEntryDelete = React.useCallback(
+    (key: number) => {
+      let nv = travelDetails.slice();
+      nv.splice(key, 1);
+      setTravelDates(nv);
+    },
+    [travelDetails]
+  );
 
   const setNotes = () => {
     let nv = travelDetails.slice();
@@ -63,30 +72,32 @@ const RecordInputBoard = () => {
   };
 
   return (
-    <div className="record-input-board">
+    <div className="record-input-board" data-testid="recordInputBoard">
       <h4 className="record-title">Input Your Travel Record</h4>
       <section
+        data-testid="countryInputSection"
         className="country-input-section"
-        onClick={() => setShowAutoComplete(!showAutoComplete)}
       >
         <label htmlFor="countryNameInput">Travel Country</label>
         <input
+          data-testid="countryNameInput"
           type="text"
           ref={inputRef}
           placeholder="Enter country name"
           className="country-name-input"
           id="countryNameInput"
           aria-label="Enter country name"
-          onKeyUp={(evt) =>
+          onClick={() => setShowAutoComplete(!showAutoComplete)}
+          onChange={evt =>
             debunceFilter((evt.target as HTMLInputElement).value)
           }
         />
         {showAutoComplete && autoCompleteList.length ? (
-          <div className="auto-complete-list">
+          <div className="auto-complete-list" data-testid="autoCompleteList">
             {autoCompleteList.map((item, i) => (
               <span
                 key={i}
-                onClick={(event) => {
+                onClick={event => {
                   event?.stopPropagation();
                   (
                     document.querySelector(
@@ -102,11 +113,12 @@ const RecordInputBoard = () => {
           </div>
         ) : null}
       </section>
-      <section className="travel-logs">
+      <section className="travel-logs" data-testid="travelLogsSection">
         <div className="add-log">
           <label htmlFor="addTravelLogBtn"> Add travel log</label>
           <button
             id="addTravelLogBtn"
+            data-testid="addTravelLogBtn"
             className="add-travel-log-btn"
             onClick={addDateEntry}
           >
@@ -126,6 +138,7 @@ const RecordInputBoard = () => {
         </div>
       </section>
       <button
+        data-testid="addRecordBtn"
         className="add-record-btn"
         aria-label="add record"
         onClick={() => {
@@ -151,17 +164,21 @@ const RecordInputBoard = () => {
       >
         ADD RECORD
       </button>
-      <section className="travel-list-section">
+      <section className="travel-list-section" data-testid="travelListSection">
         {state && state?.countries?.length
           ? state.countries.map((item, index) => (
-              <div key={index} className="travel-country-item">
+              <div
+                key={index}
+                className="travel-country-item"
+                data-testid={`${item.name}-record`}
+              >
                 <img
                   alt={item.name}
                   src={countryCodeMapper.getCountryFlag(item.code)}
                 />
                 <button
                   aria-label="Remove"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     dispatch(removeCounrty(index));
                   }}

@@ -40,6 +40,13 @@
   .country-block {
     @include countryBlockStyle();
     background-color: rgb(160, 216, 238);
+    img {
+      width: 24px;
+      height: 16px;
+      margin: auto;
+      display: block;
+    }
+    cursor: pointer;
   }
   .ps {
     grid-area: ps;
